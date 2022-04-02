@@ -43,12 +43,14 @@ public class Deck {
     }
 
     public Card drawCard() {
-        return cards.remove(0);
+        Card card = cards.remove(0);
+        System.out.println(card + " has been drawn from deck");
+        return card;
     }
 
     public List<Card> drawCards(int quantity) {
         return IntStream.range(0, quantity)
-                .mapToObj(i -> cards.remove(0))
+                .mapToObj(i -> drawCard())
                 .collect(Collectors.toList());
     }
 

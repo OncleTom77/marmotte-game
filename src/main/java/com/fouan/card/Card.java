@@ -12,6 +12,10 @@ public class Card implements Comparable<Card> {
         this.rank = rank;
     }
 
+    public int value() {
+        return rank.value;
+    }
+
     public boolean hasSameRank(Card other) {
         return rank == other.rank;
     }

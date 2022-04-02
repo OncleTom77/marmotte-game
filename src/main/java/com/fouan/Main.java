@@ -1,8 +1,8 @@
 package com.fouan;
 
 import com.fouan.game.Game;
-import com.fouan.player.strategy.BotStrategy;
 import com.fouan.player.Player;
+import com.fouan.player.strategy.BotStrategy;
 
 import java.util.Arrays;
 

@@ -14,6 +14,11 @@ public class MarmotteCard extends Card {
     }
 
     @Override
+    public int value() {
+        return value;
+    }
+
+    @Override
     public int compareTo(Card o) {
         if (o instanceof MarmotteCard) {
             return value - ((MarmotteCard) o).value;
