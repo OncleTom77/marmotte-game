@@ -1,7 +1,9 @@
 package com.fouan.game;
 
 import com.fouan.card.Deck;
+import com.fouan.card.DeckWithDiscard;
 import com.fouan.card.Discard;
+import com.fouan.card.MarmotteCard;
 import com.fouan.player.Player;
 
 import java.util.List;
@@ -9,8 +11,7 @@ import java.util.List;
 public class Game {
 
     private final List<Player> players;
-    private Deck deck;
-    private Discard discard;
+    private DeckWithDiscard deckWithDiscard;
 
     public Game(List<Player> players) {
         this.players = players;
@@ -27,8 +28,6 @@ public class Game {
                     stop = true;
                     break;
                 }
-
-                //TODO: handle empty deck. Pick all cards from discard except first and shuffle it to make the new deck
 
                 System.out.println("-----------------------------");
                 System.out.println("New turn");
@@ -59,14 +58,9 @@ public class Game {
     }
 
     private void init() {
-        deck = Deck.marmotte();
-        deck.shuffle();
-        discard = new Discard();
-        discard.add(deck.drawCard()); // init discard
-        players.forEach(player -> {
-            player.watch(discard);
-            player.setDeckAndDrawInitialCards(deck);
-        });
+        deckWithDiscard = new DeckWithDiscard(Deck.marmotte());
+        deckWithDiscard.shuffleAndInitDiscard();
+        deckWithDiscard.dealCardsToPlayers(players);
     }
 
     private void printGame() {

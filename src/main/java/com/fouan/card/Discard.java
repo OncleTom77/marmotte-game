@@ -2,17 +2,14 @@ package com.fouan.card;
 
 import com.fouan.game.DiscardObserver;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Discard {
-    private final Deque<Card> discard;
+    private final Deque<Card> cards;
     private final Set<DiscardObserver> discardObservers;
 
     public Discard() {
-        discard = new ArrayDeque<>();
+        cards = new ArrayDeque<>();
         discardObservers = new HashSet<>();
     }
 
@@ -21,22 +18,28 @@ public class Discard {
     }
 
     public Card getLast() {
-        return discard.peek();
+        return cards.peek();
     }
 
     public Card drawLast() {
-        Card card = discard.pop();
+        Card card = cards.pop();
         System.out.println(card + " has been drawn from discard");
         return card;
     }
 
     public void add(Card card) {
         System.out.println(card + " has been discarded");
-        discard.push(card);
+        cards.push(card);
         discardObservers.forEach(discardObserver -> discardObserver.notify(card));
     }
 
-    public void clear() {
-        discard.clear();
+    public List<Card> empty(boolean keepLast) {
+        List<Card> copy = new ArrayList<>(this.cards);
+        cards.clear();
+        if (keepLast) {
+            Card last = copy.remove(0);
+            cards.push(last);
+        }
+        return copy;
     }
 }

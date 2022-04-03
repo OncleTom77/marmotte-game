@@ -5,12 +5,12 @@ public class MarmotteCard extends Card {
     private final int value;
 
     public MarmotteCard(Suit suit, Rank rank) {
-        this(suit, rank, rank.value);
-    }
-
-    public MarmotteCard(Suit suit, Rank rank, int value) {
         super(suit, rank);
-        this.value = value;
+        if ((suit == Suit.DIAMOND || suit == Suit.HEART) && rank == Rank.KING) {
+            this.value = 0;
+        } else {
+            this.value = rank.value;
+        }
     }
 
     @Override

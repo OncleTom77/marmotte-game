@@ -8,13 +8,13 @@ import java.util.Optional;
 public class BotStrategy extends PlayerStrategy {
     private static final Card HALF_RANK_CARD = new Card(Suit.CLUB, Rank.SEVEN);
     private static final Card TOO_HIGH_RANK_CARD = new Card(Suit.CLUB, Rank.TEN);
-    private static final int STOP_GAME_THRESHOLD_VALUES = 5;
+    private static final int STOP_GAME_THRESHOLD_CARD_VALUES = 5;
 
     @Override
     public void executes(List<Card> knownCards, List<Card> unknownCards, Deck deck, Discard discard) {
         Card lastDiscarded = discard.getLast();
         Optional<Card> knownCardEqualsDiscarded = knownCards.stream()
-                .filter(knownCard -> knownCard.compareTo(lastDiscarded) == 0)
+                .filter(card -> card.compareTo(lastDiscarded) == 0)
                 .findFirst();
         Optional<Card> maxKnownCardAboveDiscarded = knownCards.stream()
                 .filter(card -> card.compareTo(lastDiscarded) > 0)
@@ -64,6 +64,6 @@ public class BotStrategy extends PlayerStrategy {
         int totalPoints = knownCards.stream()
                 .mapToInt(Card::value)
                 .sum();
-        return unknownCards.isEmpty() && totalPoints <= STOP_GAME_THRESHOLD_VALUES;
+        return unknownCards.isEmpty() && totalPoints <= STOP_GAME_THRESHOLD_CARD_VALUES;
     }
 }
