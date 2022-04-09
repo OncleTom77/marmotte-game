@@ -1,18 +1,17 @@
 package com.fouan.player.strategy;
 
 import com.fouan.card.Card;
-import com.fouan.card.Deck;
-import com.fouan.card.Discard;
+import com.fouan.card.DeckWithDiscard;
 
 import java.util.List;
 
 public class RealPlayerStrategy extends PlayerStrategy {
     @Override
-    public void executes(List<Card> knownCards, List<Card> unknownCards, Deck deck, Discard discard) {
+    protected void executes(List<Card> knownCards, List<Card> unknownCards, DeckWithDiscard deckWithDiscard) {
     }
 
     @Override
-    public boolean stopGame(List<Card> knownCards, List<Card> unknownCards, Deck deck, Discard discard) {
+    public boolean stopGame(List<Card> knownCards, List<Card> unknownCards, DeckWithDiscard deckWithDiscard) {
         return false;
     }
 }

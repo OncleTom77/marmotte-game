@@ -2,8 +2,6 @@ package com.fouan.game;
 
 import com.fouan.card.Deck;
 import com.fouan.card.DeckWithDiscard;
-import com.fouan.card.Discard;
-import com.fouan.card.MarmotteCard;
 import com.fouan.player.Player;
 
 import java.util.List;
@@ -60,10 +58,10 @@ public class Game {
     private void init() {
         deckWithDiscard = new DeckWithDiscard(Deck.marmotte());
         deckWithDiscard.shuffleAndInitDiscard();
-        deckWithDiscard.dealCardsToPlayers(players);
+        deckWithDiscard.dealCardsToPlayers(players, 4);
     }
 
     private void printGame() {
-        System.out.println("Discard: " + discard.getLast());
+        System.out.println("Discard: " + deckWithDiscard.getLastDiscarded());
     }
 }

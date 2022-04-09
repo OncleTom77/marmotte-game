@@ -1,5 +1,6 @@
 package com.fouan.card;
 
+import com.fouan.game.DiscardObserver;
 import com.fouan.player.Player;
 
 import java.util.List;
@@ -18,10 +19,10 @@ public class DeckWithDiscard {
         discard.add(deck.drawCard()); // init discard
     }
 
-    public void dealCardsToPlayers(List<Player> players) {
+    public void dealCardsToPlayers(List<Player> players, int nbCards) {
         players.forEach(player -> {
-            player.watch(discard);
-            player.setDeckAndDrawInitialCards(deck); //TODO: draw cards here and pass cards to player
+            List<Card> cards = deck.drawCards(nbCards);
+            player.initPlayer(this, cards);
         });
     }
 
@@ -44,6 +45,10 @@ public class DeckWithDiscard {
 
     public void discard(Card card) {
         discard.add(card);
+    }
+
+    public void addDiscardObserver(DiscardObserver observer) {
+        discard.addObserver(observer);
     }
 
     private void fillDeckFromDiscard() {
